@@ -29,19 +29,16 @@ public class MethodsFile {
 		int intTemp [] = new int [3];
 		int intCount;
 		int intCount2;
+		int intCount3;
 		
 		for (intCount2 = 0; intCount2 < 52-1; intCount2++) {
 			for (intCount = 0; intCount < 52-1; intCount++) {
 				if (intDeck [intCount][2] > intDeck [intCount+1][2]) {
-					intTemp [0] = intDeck [intCount][0];
-					intTemp [1] = intDeck [intCount][1];
-					intTemp [2] = intDeck [intCount][2];
-					intDeck [intCount][0] = intDeck [intCount+1][0];
-					intDeck [intCount][1] = intDeck [intCount+1][1];
-					intDeck [intCount][2] = intDeck [intCount+1][2];
-					intDeck [intCount+1][0] = intTemp [0];
-					intDeck [intCount+1][1] = intTemp [1];
-					intDeck [intCount+1][2] = intTemp [2];
+					for (intCount3 = 0; intCount3 < 3; intCount3++) {
+						intTemp [intCount3] = intDeck [intCount][intCount3];
+						intDeck [intCount][intCount3] = intDeck [intCount+1][intCount3];
+						intDeck [intCount+1][intCount3] = intTemp [intCount3];
+					}
 				}
 			}
 		}
