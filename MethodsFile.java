@@ -31,13 +31,13 @@ public class MethodsFile {
 		int intCount2;
 		int intCount3;
 		
-		for (intCount2 = 0; intCount2 < 52-1; intCount2++) {
-			for (intCount = 0; intCount < 52-1; intCount++) {
-				if (intDeck [intCount][2] > intDeck [intCount+1][2]) {
+		for (intCount = 0; intCount < 51; intCount++) {
+			for (intCount2 = 0; intCount2 < 51; intCount2++) {
+				if (intDeck [intCount2][2] > intDeck [intCount2+1][2]) {
 					for (intCount3 = 0; intCount3 < 3; intCount3++) {
-						intTemp [intCount3] = intDeck [intCount][intCount3];
-						intDeck [intCount][intCount3] = intDeck [intCount+1][intCount3];
-						intDeck [intCount+1][intCount3] = intTemp [intCount3];
+						intTemp [intCount3] = intDeck [intCount2][intCount3];
+						intDeck [intCount2][intCount3] = intDeck [intCount2+1][intCount3];
+						intDeck [intCount2+1][intCount3] = intTemp [intCount3];
 					}
 				}
 			}
