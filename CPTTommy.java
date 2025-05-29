@@ -7,11 +7,14 @@ public class CPTTommy {
 		int intMoney = 1000;
 		int intCount = 2;
 		int intHits = 0;
+		int intSum = 0;
+		int intSumDealer = 0;
 		String strName;
 		String strInput;
 		
 		int intDeck [][] = MethodsFile.deck();
 		intDeck = MethodsFile.sort(intDeck);
+		//intDeck = MethodsFile.basevalue(intDeck);
 		int intPlayers [][] = new int [5][2];
 		int intDealer [][] = new int [5][2];
 	
@@ -22,32 +25,55 @@ public class CPTTommy {
 		
 		intPlayers [0][0] = intDeck [0][0];
 		intPlayers [0][1] = intDeck [0][1];
-		intPlayers [1][0] = intDeck [1][0];
-		intPlayers [1][1] = intDeck [1][1];
+		//intPlayers [0][2] = intDeck [0][2];
+		intDealer [0][0] = intDeck [1][0];
+		intDealer [0][1] = intDeck [1][1];
+		intPlayers [1][0] = intDeck [2][0];
+		intPlayers [1][1] = intDeck [2][1];
+		//intPlayers [1][2] = intDeck [1][2];
 		
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
 				con.print(intPlayers[i][j] + " ");
 			}
+			if (intPlayers [i][0] == 11 || intPlayers [i][0] == 12 || intPlayers [i][0] == 13) {
+				intSum += 10;
+			} else intSum += intPlayers [i][0];
 			con.println();
 		}
+		
+		con.println(intSum);
 		
 		for (intHits = 0; intHits < 3; intHits++) {
-		if (con.readLine().equalsIgnoreCase("hit")) {
-			intPlayers [intCount][0] = intDeck [intCount][0];
-			intPlayers [intCount][1] = intDeck [intCount][1];
-			
-			for (int i = 0; i < intCount+1; i++) {
-				for (int j = 0; j < 2; j++) {
-					con.print(intPlayers[i][j] + " ");
+			if (con.readLine().equalsIgnoreCase("hit")) {
+				intPlayers [intCount+1][0] = intDeck [intCount+1][0];
+				intPlayers [intCount+1][1] = intDeck [intCount+1][1];
+				
+				for (int i = 0; i < intCount+1; i++) {
+					for (int j = 0; j < 2; j++) {
+						con.print(intPlayers[i][j] + " ");
+					}
+					con.println();
 				}
-			con.println();
+				if (intPlayers [intCount+1][0] == 11 || intPlayers [intCount+1][0] == 12 || intPlayers [intCount+1][0] == 13) {
+					intSum += 10;
+				} else { 
+					 intSum += intPlayers [intCount+1][0];
+				}
+				con.println(intSum);
+				intCount++;
+			} else if (con.readLine().equalsIgnoreCase("stand")) {
+				break;
 			}
+		}
 		
-			intCount++;
+		con.println(intDealer [0][0] + " " + intDealer [0][1]);
+		if (intDealer [0][0] == 11 || intDealer [0][0] == 12 || intDealer [0][0] == 13) {
+			intSumDealer += 10;
+		} else { 
+			 intSumDealer += intDealer [0][0];
 		}
-		con.println(intCount);
-		}
+		while (intSumDealer < 17) {}
 		
 	}
 }

@@ -44,4 +44,27 @@ public class MethodsFile {
 		}
 		return intDeck;
 	}
+	
+	public static int [][] basevalue(int intDeck [][]) {
+		
+		int intCount;
+		
+		for (intCount = 0; intCount < 52; intCount++) {
+			if (intDeck [intCount][0] == 11 || intDeck [intCount][0] == 12 || intDeck [intCount][0] == 13) {
+				intDeck [intCount][2] = 10;
+			} else intDeck [intCount][2] = intDeck [intCount][0];
+		}
+		return intDeck;
+	}
+		
+	public static int [][] dealer(int intDeck [][]) {
+		
+		int intSum = 0;
+		int intCount = 0;
+		
+		while (intSum < 17) {
+			//intDeck [][] = 
+		}
+		return intDeck;
+	}
 }
