@@ -45,24 +45,20 @@ public class CPTTommy {
 		con.println(intSum);
 		
 		for (intHits = 0; intHits < 3; intHits++) {
-			if (con.readLine().equalsIgnoreCase("hit")) {
-				intPlayers [intCount+1][0] = intDeck [intCount+1][0];
-				intPlayers [intCount+1][1] = intDeck [intCount+1][1];
-				
-				for (int i = 0; i < intCount+1; i++) {
-					for (int j = 0; j < 2; j++) {
-						con.print(intPlayers[i][j] + " ");
-					}
-					con.println();
-				}
-				if (intPlayers [intCount+1][0] == 11 || intPlayers [intCount+1][0] == 12 || intPlayers [intCount+1][0] == 13) {
+			char chrInputMain = con.getChar();
+			if (chrInputMain == 'h' || chrInputMain == 'H') {
+				intPlayers [intCount][0] = intDeck [intCount+1][0];
+				intPlayers [intCount][1] = intDeck [intCount+1][1];
+				con.print(intPlayers[intCount][0] + " " + intPlayers[intCount][1]);
+				con.println();
+				if (intPlayers [intCount][0] == 11 || intPlayers [intCount][0] == 12 || intPlayers [intCount][0] == 13) {
 					intSum += 10;
 				} else { 
-					 intSum += intPlayers [intCount+1][0];
+					 intSum += intPlayers [intCount][0];
 				}
 				con.println(intSum);
 				intCount++;
-			} else if (con.readLine().equalsIgnoreCase("stand")) {
+			} else if (chrInputMain == 's' || chrInputMain == 'S') {
 				break;
 			}
 		}
