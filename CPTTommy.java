@@ -51,13 +51,11 @@ public class CPTTommy {
 				intPlayers [intCount][1] = intDeck [intCount+1][1];
 				con.print(intPlayers[intCount][0] + " " + intPlayers[intCount][1]);
 				con.println();
-				
 				if (intPlayers [intCount][0] == 11 || intPlayers [intCount][0] == 12 || intPlayers [intCount][0] == 13) {
 					intSum += 10;
 				} else { 
 					 intSum += intPlayers [intCount][0];
 				}
-				
 				con.println(intSum);
 				intCount++;
 			} else if (chrInputMain == 's' || chrInputMain == 'S') {
