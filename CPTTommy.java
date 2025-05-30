@@ -76,8 +76,8 @@ public class CPTTommy {
 		}
 		
 		intHits = 1;
-		
 		con.println("The dealer's new cards are:");
+		
 		while (intSumDealer < 17) {
 			intDealer [intHits][0] = intDeck [intCount+1][0];
 			intDealer [intHits][1] = intDeck [intCount+1][1];
