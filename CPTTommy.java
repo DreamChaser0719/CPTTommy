@@ -57,6 +57,7 @@ public class CPTTommy {
 				} else { 
 					 intSum += intPlayers [intCount][0];
 				}
+				
 				con.println(intSum);
 				intCount++;
 			} else if (chrInputMain == 's' || chrInputMain == 'S') {
