@@ -50,7 +50,6 @@ public class CPTTommy {
 				con.println();
 			}
 			
-			
 			con.println("The cards currently adds up to " + intSum);
 			if (intSum == 9 | intSum == 10 || intSum == 11) {
 				con.println("Do you wish to double down? (Y/N)");
