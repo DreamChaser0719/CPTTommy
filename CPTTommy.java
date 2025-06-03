@@ -52,8 +52,151 @@ public class CPTTommy {
 			
 			
 			con.println("The cards currently adds up to " + intSum);
-			
+			if (intSum == 9 | intSum == 10 || intSum == 11) {
+				con.println("Do you wish to double down? (Y/N)");
+				char chrInputDD = con.getChar();
+				if (chrInputDD == 'y' || chrInputDD == 'Y') {
+					if (intBet * 2 < intMoney) {
+						intBet = intMoney;
+					} else {
+						intBet += intBet;
+					}
+					
+					intPlayers [2][0] = intDeck [3][0];
+					intPlayers [2][1] = intDeck [3][1];
+					con.println("The cards currently adds up to " + intSum);
+					intSum += intPlayers [2][0];
+					con.println("The cards adds up to " + intSum);
 
+					while (intSumDealer < 17) {
+						intDealer [intHits][0] = intDeck [intCount+2][0];
+						intDealer [intHits][1] = intDeck [intCount+2][1];
+						con.print(intDealer[intHits][0] + " " + intDealer[intHits][1]);
+						con.println();
+						if (intDealer [intHits][0] == 11 || intDealer [intHits][0] == 12 || intDealer [intHits][0] == 13) {
+							intSumDealer += 10;
+						} else { 
+							intSumDealer += intDealer [intHits][0];
+						}
+						intHits++;
+						intCount++;
+						
+						if (intHits == 5) {
+							break;
+						}
+					}
+				
+					if (intSumDealer > 21) {
+						con.println("Dealer busted!");
+						intMoney = intMoney + intBet;
+					} else if (intSum > intSumDealer) {
+						con.println("You won!");
+						intMoney = intMoney + intBet;
+					} else if (intSum < intSumDealer){
+						con.println("You lost!");
+						intMoney = intMoney - intBet;
+					} else {
+						con.println("Tied! Bet returned");
+					}
+					
+					con.println("You currently have: " + intMoney);
+					intSum = 0;
+					intSumDealer = 0;
+					intCount = 2;
+					intHits = 0;
+					
+				if (intMoney < 0) {
+					intMoney = 0;
+				}
+				} else {
+					while (intSum < 22) {
+					char chrInputMain = con.getChar();
+					if (chrInputMain == 'h' || chrInputMain == 'H') {
+						intPlayers [intCount][0] = intDeck [intCount+1][0];
+						intPlayers [intCount][1] = intDeck [intCount+1][1];
+						con.println("Your new card is:");
+						con.print(intPlayers[intCount][0] + " " + intPlayers[intCount][1]);
+						con.println();
+						if (intPlayers [intCount][0] == 11 || intPlayers [intCount][0] == 12 || intPlayers [intCount][0] == 13) {
+							intSum += 10;
+						} else { 
+							 intSum += intPlayers [intCount][0];
+						}
+						con.println("Your new sum is: " + intSum);
+						intCount++;
+						intHits++;
+					} else if (chrInputMain == 's' || chrInputMain == 'S') {
+						break;
+					} else if (intHits == 4) {
+						break;
+					}
+				}
+				
+				con.println("The dealer's cards are: ");
+				con.println(intDealer [0][0] + " " + intDealer [0][1]);
+				if (intDealer [0][0] == 11 || intDealer [0][0] == 12 || intDealer [0][0] == 13) {
+					intSumDealer += 10;
+				} else { 
+					 intSumDealer += intDealer [0][0];
+				}
+				
+				intHits = 1;		
+				
+				while (intSumDealer < 17) {
+					intDealer [intHits][0] = intDeck [intCount+1][0];
+					intDealer [intHits][1] = intDeck [intCount+1][1];
+					con.print(intDealer[intHits][0] + " " + intDealer[intHits][1]);
+					con.println();
+					if (intDealer [intHits][0] == 11 || intDealer [intHits][0] == 12 || intDealer [intHits][0] == 13) {
+					intSumDealer += 10;
+					} else { 
+						intSumDealer += intDealer [intHits][0];
+					}
+					intHits++;
+					intCount++;
+					
+					if (intHits == 5) {
+						break;
+					}
+				}
+				con.println("Dealer's sum is: " + intSumDealer);
+				
+				if (intSum > 21) {
+					con.println("You busted!");
+					intMoney = intMoney - intBet;
+				} else if (intSumDealer > 21) {
+					con.println("Dealer busted!");
+					intMoney = intMoney + intBet;
+				} else if (intPlayers[4][0] != 0) {
+					con.println("You got 5 cards and did not bust! You got 3x bet!");
+					intMoney = intMoney + intBet * 2;
+				} else if (intDealer[4][0] != 0) {
+					con.println("Dealer got 5 cards and did not bust! You lost 3x bet!");
+					intMoney = intMoney - intBet * 2;
+				} else if (intSum > intSumDealer) {
+					con.println("You won!");
+					intMoney = intMoney + intBet;
+				} else if (intSum < intSumDealer){
+					con.println("You lost!");
+					intMoney = intMoney - intBet;
+				} else {
+					con.println("Tied! Bet returned");
+				}
+				
+				if (intMoney < 0) {
+					intMoney = 0;
+				}
+				
+				con.println("You currently have: " + intMoney);
+				intSum = 0;
+				intSumDealer = 0;
+				intCount = 2;
+				intHits = 0;
+				}
+			} else if ((intPlayers[0][0] == 1 && intPlayers[1][0] == 10) || (intPlayers[0][0] == 1 && intPlayers[1][0] == 11) || (intPlayers[0][0] == 1 && intPlayers[1][0] == 12) || (intPlayers[0][0] == 1 && intPlayers[1][0] == 13) || (intPlayers[0][0] == 10 && intPlayers[1][0] == 1) || (intPlayers[0][0] == 11 && intPlayers[1][0] == 1) || (intPlayers[0][0] == 12 && intPlayers[1][0] == 1) || (intPlayers[0][0] == 13 && intPlayers[1][0] == 1)) {
+					con.println("BLACKJACK! 3X BET!");
+					intMoney = intMoney + intBet * 2;
+			} else {
 				while (intSum < 22) {
 					char chrInputMain = con.getChar();
 					if (chrInputMain == 'h' || chrInputMain == 'H') {
@@ -100,7 +243,7 @@ public class CPTTommy {
 					intHits++;
 					intCount++;
 					
-					if (intHits == 4) {
+					if (intHits == 5) {
 						break;
 					}
 				}
@@ -118,9 +261,6 @@ public class CPTTommy {
 				} else if (intDealer[4][0] != 0) {
 					con.println("Dealer got 5 cards and did not bust! You lost 3x bet!");
 					intMoney = intMoney - intBet * 2;
-				} else if ((intPlayers[0][0] == 1 && intPlayers[1][0] == 10) || (intPlayers[0][0] == 1 && intPlayers[1][0] == 11) || (intPlayers[0][0] == 1 && intPlayers[1][0] == 12) || (intPlayers[0][0] == 1 && intPlayers[1][0] == 13) || (intPlayers[0][0] == 10 && intPlayers[1][0] == 1) || (intPlayers[0][0] == 11 && intPlayers[1][0] == 1) || (intPlayers[0][0] == 12 && intPlayers[1][0] == 1) || (intPlayers[0][0] == 13 && intPlayers[1][0] == 1)) {
-					con.println("BLACKJACK! 3X BET!");
-					intMoney = intMoney + intBet * 2;
 				} else if (intSum > intSumDealer) {
 					con.println("You won!");
 					intMoney = intMoney + intBet;
@@ -140,7 +280,7 @@ public class CPTTommy {
 				intSumDealer = 0;
 				intCount = 2;
 				intHits = 0;
-
+			}
 		}
 	}
 }
