@@ -57,14 +57,23 @@ public class MethodsFile {
 		return intDeck;
 	}
 		
-	public static int [][] dealer(int intDeck [][]) {
+	public static String [][] leaderboard(String strLB [][], int intLBCount) {
 		
-		int intSum = 0;
-		int intCount = 0;
+		int intTemp [] = new String [3];
+		int intCount;
+		int intCount2;
+		int intCount3;
 		
-		while (intSum < 17) {
-			//intDeck [][] = 
+		for (intCount = 0; intCount < intLBCount; intCount++) {
+			for (intCount2 = 0; intCount2 < intLBCount; intCount2++) {
+				if (intDeck [intCount2][2] > intDeck [intCount2+1][2]) {
+					for (intCount3 = 0; intCount3 < 3; intCount3++) {
+						intTemp [intCount3] = intDeck [intCount2][intCount3];
+						intDeck [intCount2][intCount3] = intDeck [intCount2+1][intCount3];
+						intDeck [intCount2+1][intCount3] = intTemp [intCount3];
+					}
+				}
+			}
 		}
-		return intDeck;
 	}
 }
