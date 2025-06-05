@@ -1,5 +1,3 @@
-import arc.*;
-	
 public class MethodsFile {	
 	public static int [][] deck() {
 		
@@ -56,27 +54,6 @@ public class MethodsFile {
 		}
 		return intDeck;
 	}
-<<<<<<< Updated upstream
-		
-	public static String [][] leaderboard(String strLB [][], int intLBCount) {
-		
-		int intTemp [] = new String [3];
-		int intCount;
-		int intCount2;
-		int intCount3;
-		
-		for (intCount = 0; intCount < intLBCount; intCount++) {
-			for (intCount2 = 0; intCount2 < intLBCount; intCount2++) {
-				if (intDeck [intCount2][2] > intDeck [intCount2+1][2]) {
-					for (intCount3 = 0; intCount3 < 3; intCount3++) {
-						intTemp [intCount3] = intDeck [intCount2][intCount3];
-						intDeck [intCount2][intCount3] = intDeck [intCount2+1][intCount3];
-						intDeck [intCount2+1][intCount3] = intTemp [intCount3];
-					}
-				}
-			}
-		}
-=======
 	
 	public static int CalculateTotal(int[][] intPlayingDeck) {
 		int intTotal = 0;
@@ -103,7 +80,6 @@ public class MethodsFile {
 			intAce--;
 		}
 		return intTotal;
->>>>>>> Stashed changes
 	}
 	/*
 	public static String [][] leaderboard(String strLB [][], int intLBCount) {
@@ -127,3 +103,4 @@ public class MethodsFile {
 	}
 	*/
 }
+
