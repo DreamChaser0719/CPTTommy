@@ -35,6 +35,13 @@ public class CPTTommy {
 			} else if (chrInputHome == 'q' || chrInputHome == 'Q') {
 				con.closeConsole();
 			} else if (chrInputHome == 'p' ||chrInputHome == 'P') {
+<<<<<<< Updated upstream
+=======
+				
+				con.println("Enter your name:");
+				strName = con.readLine();
+				
+>>>>>>> Stashed changes
 				while (intMoney > 0) {
 					int intDeck [][] = MethodsFile.deck();
 					intDeck = MethodsFile.sort(intDeck);
@@ -51,8 +58,11 @@ public class CPTTommy {
 					intPlayers [1][1] = intDeck [2][1];
 					//intPlayers [1][2] = intDeck [1][2];
 					
+<<<<<<< Updated upstream
 					con.println("Enter your name:");
 					strName = con.readLine();
+=======
+>>>>>>> Stashed changes
 					con.println("Enter your bet:");
 					intBet = con.readInt();
 					
@@ -62,6 +72,7 @@ public class CPTTommy {
 						for (int j = 0; j < 2; j++) {
 							con.print(intPlayers[i][j] + " ");
 						}
+<<<<<<< Updated upstream
 						if (intPlayers [i][0] == 11 || intPlayers [i][0] == 12 || intPlayers [i][0] == 13) {
 							intSum += 10;
 						} else intSum += intPlayers [i][0];
@@ -70,6 +81,16 @@ public class CPTTommy {
 					
 					con.println("The cards currently adds up to " + intSum);
 					if (intSum == 9 | intSum == 10 || intSum == 11) {
+=======
+						con.println();
+					}
+					
+					intSum = MethodsFile.CalculateTotal(intPlayers);
+					con.println("The cards currently adds up to " + intSum);
+					
+					if (intSum == 9 | intSum == 10 || intSum == 11) {
+						con.println("The cards currently adds up to " + intSum);
+>>>>>>> Stashed changes
 						con.println("Do you wish to double down? (Y/N)");
 						char chrInputDD = con.getChar();
 						if (chrInputDD == 'y' || chrInputDD == 'Y') {
@@ -81,8 +102,13 @@ public class CPTTommy {
 							
 							intPlayers [2][0] = intDeck [3][0];
 							intPlayers [2][1] = intDeck [3][1];
+<<<<<<< Updated upstream
 							con.println("The cards currently adds up to " + intSum);
 							intSum += intPlayers [2][0];
+=======
+							
+							intSum = MethodsFile.CalculateTotal(intPlayers);
+>>>>>>> Stashed changes
 							con.println("The cards adds up to " + intSum);
 
 							while (intSumDealer < 17) {
@@ -90,11 +116,17 @@ public class CPTTommy {
 								intDealer [intHits][1] = intDeck [intCount+2][1];
 								con.print(intDealer[intHits][0] + " " + intDealer[intHits][1]);
 								con.println();
+<<<<<<< Updated upstream
 								if (intDealer [intHits][0] == 11 || intDealer [intHits][0] == 12 || intDealer [intHits][0] == 13) {
 									intSumDealer += 10;
 								} else { 
 									intSumDealer += intDealer [intHits][0];
 								}
+=======
+								
+								intSumDealer = MethodsFile.CalculateTotal(intDealer);
+								
+>>>>>>> Stashed changes
 								intHits++;
 								intCount++;
 								
@@ -122,9 +154,15 @@ public class CPTTommy {
 							intCount = 2;
 							intHits = 0;
 							
+<<<<<<< Updated upstream
 						if (intMoney < 0) {
 							intMoney = 0;
 						}
+=======
+							if (intMoney < 0) {
+								intMoney = 0;
+							}
+>>>>>>> Stashed changes
 						} else {
 							while (intSum < 22) {
 							char chrInputMain = con.getChar();
@@ -134,11 +172,16 @@ public class CPTTommy {
 								con.println("Your new card is:");
 								con.print(intPlayers[intCount][0] + " " + intPlayers[intCount][1]);
 								con.println();
+<<<<<<< Updated upstream
 								if (intPlayers [intCount][0] == 11 || intPlayers [intCount][0] == 12 || intPlayers [intCount][0] == 13) {
 									intSum += 10;
 								} else { 
 									 intSum += intPlayers [intCount][0];
 								}
+=======
+								intSum = MethodsFile.CalculateTotal(intPlayers);
+
+>>>>>>> Stashed changes
 								con.println("Your new sum is: " + intSum);
 								intCount++;
 								intHits++;
@@ -151,11 +194,15 @@ public class CPTTommy {
 						
 						con.println("The dealer's cards are: ");
 						con.println(intDealer [0][0] + " " + intDealer [0][1]);
+<<<<<<< Updated upstream
 						if (intDealer [0][0] == 11 || intDealer [0][0] == 12 || intDealer [0][0] == 13) {
 							intSumDealer += 10;
 						} else { 
 							 intSumDealer += intDealer [0][0];
 						}
+=======
+						intSumDealer = MethodsFile.CalculateTotal(intDealer);
+>>>>>>> Stashed changes
 						
 						intHits = 1;		
 						
@@ -164,11 +211,17 @@ public class CPTTommy {
 							intDealer [intHits][1] = intDeck [intCount+1][1];
 							con.print(intDealer[intHits][0] + " " + intDealer[intHits][1]);
 							con.println();
+<<<<<<< Updated upstream
 							if (intDealer [intHits][0] == 11 || intDealer [intHits][0] == 12 || intDealer [intHits][0] == 13) {
 							intSumDealer += 10;
 							} else { 
 								intSumDealer += intDealer [intHits][0];
 							}
+=======
+							
+							intSumDealer = MethodsFile.CalculateTotal(intDealer);
+
+>>>>>>> Stashed changes
 							intHits++;
 							intCount++;
 							
@@ -222,11 +275,17 @@ public class CPTTommy {
 								con.println("Your new card is:");
 								con.print(intPlayers[intCount][0] + " " + intPlayers[intCount][1]);
 								con.println();
+<<<<<<< Updated upstream
 								if (intPlayers [intCount][0] == 11 || intPlayers [intCount][0] == 12 || intPlayers [intCount][0] == 13) {
 									intSum += 10;
 								} else { 
 									 intSum += intPlayers [intCount][0];
 								}
+=======
+								
+								intSum = MethodsFile.CalculateTotal(intPlayers);
+								
+>>>>>>> Stashed changes
 								con.println("Your new sum is: " + intSum);
 								intCount++;
 								intHits++;
@@ -239,11 +298,15 @@ public class CPTTommy {
 						
 						con.println("The dealer's cards are: ");
 						con.println(intDealer [0][0] + " " + intDealer [0][1]);
+<<<<<<< Updated upstream
 						if (intDealer [0][0] == 11 || intDealer [0][0] == 12 || intDealer [0][0] == 13) {
 							intSumDealer += 10;
 						} else { 
 							 intSumDealer += intDealer [0][0];
 						}
+=======
+						intSumDealer = MethodsFile.CalculateTotal(intDealer);
+>>>>>>> Stashed changes
 						
 						intHits = 1;		
 						
@@ -252,11 +315,17 @@ public class CPTTommy {
 							intDealer [intHits][1] = intDeck [intCount+1][1];
 							con.print(intDealer[intHits][0] + " " + intDealer[intHits][1]);
 							con.println();
+<<<<<<< Updated upstream
 							if (intDealer [intHits][0] == 11 || intDealer [intHits][0] == 12 || intDealer [intHits][0] == 13) {
 							intSumDealer += 10;
 							} else { 
 								intSumDealer += intDealer [intHits][0];
 							}
+=======
+							
+							intSumDealer = MethodsFile.CalculateTotal(intDealer);
+
+>>>>>>> Stashed changes
 							intHits++;
 							intCount++;
 							
@@ -317,7 +386,11 @@ public class CPTTommy {
 					strLB[intLBCount][2] = (int)(100*Math.random()) + "";
 					intLBCount++;
 				}
+<<<<<<< Updated upstream
 				strLB = MethodsFile.leaderboard(strLB, intLBCount);
+=======
+				//strLB = MethodsFile.leaderboard(strLB, intLBCount);
+>>>>>>> Stashed changes
 			}
 		}
 	}
