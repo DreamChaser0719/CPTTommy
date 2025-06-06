@@ -300,7 +300,7 @@ public class CPTTommy {
 					strLB[intLBCount][2] = (int)(100*Math.random()) + "";
 					intLBCount++;
 				}
-				//strLB = MethodsFile.leaderboard(strLB, intLBCount);
+				strLB = MethodsFile.leaderboard(strLB, intLBCount);
 			}
 		}
 	}

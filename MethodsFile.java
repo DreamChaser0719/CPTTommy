@@ -81,26 +81,27 @@ public class MethodsFile {
 		}
 		return intTotal;
 	}
-	/*
+	
 	public static String [][] leaderboard(String strLB [][], int intLBCount) {
 		
-		int intTemp [] = new String [3];
+		String strTemp [] = new String [3];
 		int intCount;
 		int intCount2;
 		int intCount3;
 		
-		for (intCount = 0; intCount < intLBCount; intCount++) {
-			for (intCount2 = 0; intCount2 < intLBCount; intCount2++) {
-				if (intDeck [intCount2][2] > intDeck [intCount2+1][2]) {
+		for (intCount = 0; intCount < intLBCount-1; intCount++) {
+			for (intCount2 = 0; intCount2 < intLBCount-1; intCount2++) {
+				
+				if (Integer.parseInt(strLB[intCount2][2]) > Integer.parseInt(strLB[intCount2+1][2])) {
 					for (intCount3 = 0; intCount3 < 3; intCount3++) {
-						intTemp [intCount3] = intDeck [intCount2][intCount3];
-						intDeck [intCount2][intCount3] = intDeck [intCount2+1][intCount3];
-						intDeck [intCount2+1][intCount3] = intTemp [intCount3];
+						strTemp [intCount3] = strLB [intCount2][intCount3];
+						strLB [intCount2][intCount3] = strLB [intCount2+1][intCount3];
+						strLB [intCount2+1][intCount3] = strTemp [intCount3];
 					}
 				}
 			}
 		}
+		return strLB;
 	}
-	*/
 }
 
