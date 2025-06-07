@@ -282,6 +282,8 @@ public class CPTTommy {
 						intHits = 0;
 					}
 				}
+				TextOutputFile lbOutput = new TextOutputFile("Leaderboard.txt");
+				
 				
 				TextInputFile lbInput = new TextInputFile("Leaderboard.txt");
 				
