@@ -82,22 +82,23 @@ public class MethodsFile {
 		return intTotal;
 	}
 	
-	public static String [][] leaderboard(String strLB [][], int intLBCount) {
-		
-		String strTemp [] = new String [3];
+	public static String[][] leaderboard(String strLB[][], int intLBCount) {
+		String strTemp[] = new String[2];
 		int intCount;
 		int intCount2;
-		int intCount3;
-		
-		for (intCount = 0; intCount < intLBCount-1; intCount++) {
-			for (intCount2 = 0; intCount2 < intLBCount-1; intCount2++) {
-				
-				if (Integer.parseInt(strLB[intCount2][2]) > Integer.parseInt(strLB[intCount2+1][2])) {
-					for (intCount3 = 0; intCount3 < 3; intCount3++) {
-						strTemp [intCount3] = strLB [intCount2][intCount3];
-						strLB [intCount2][intCount3] = strLB [intCount2+1][intCount3];
-						strLB [intCount2+1][intCount3] = strTemp [intCount3];
-					}
+
+		for (intCount = 0; intCount < intLBCount - 1; intCount++) {
+			for (intCount2 = 0; intCount2 < intLBCount - 1; intCount2++) {
+				if (Integer.parseInt(strLB[intCount2][1]) < Integer.parseInt(strLB[intCount2 + 1][1])) {
+					// Swap name
+					strTemp[0] = strLB[intCount2][0];
+					strTemp[1] = strLB[intCount2][1];
+
+					strLB[intCount2][0] = strLB[intCount2 + 1][0];
+					strLB[intCount2][1] = strLB[intCount2 + 1][1];
+
+					strLB[intCount2 + 1][0] = strTemp[0];
+					strLB[intCount2 + 1][1] = strTemp[1];
 				}
 			}
 		}
