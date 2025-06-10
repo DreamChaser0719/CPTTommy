@@ -90,20 +90,21 @@ public class CPTTommy {
 						con.println("Do you wish to double down? (Y/N)");
 						char chrInputDD = con.getChar();
 						if (chrInputDD == 'y' || chrInputDD == 'Y') {
-							if (intBet * 2 < intMoney) {
+							if (intBet * 2 <= intMoney) {
 								intBet *= 2;
+								intPlayers[2][0] = intDeck[3][0];
+								intPlayers[2][1] = intDeck[3][1];
+								
+								con.println(intPlayers[2][0] + " " + intPlayers[2][1]);
+								intSum = MethodsFile.CalculateTotal(intPlayers);
+								con.println("The cards add up to " + intSum);
+
+								intCount = 3;
+								doubledDown = true;
 							} else {
-								intBet = intMoney;
+								con.println("You don't have enough money!");
+								doubledDown = false;
 							}
-
-							intPlayers[2][0] = intDeck[3][0];
-							intPlayers[2][1] = intDeck[3][1];
-
-							intSum = MethodsFile.CalculateTotal(intPlayers);
-							con.println("The cards add up to " + intSum);
-
-							intCount = 3;
-							doubledDown = true;
 						}
 					}
 					
