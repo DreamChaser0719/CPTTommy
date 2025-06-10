@@ -105,4 +105,3 @@ public class MethodsFile {
 		return strLB;
 	}
 }
-
