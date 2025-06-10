@@ -104,4 +104,22 @@ public class MethodsFile {
 		}
 		return strLB;
 	}
+	public static String[] getCardNames(int intHands [][]) {
+		int intCount;
+		int intRank;
+		int intSuit;
+		String[] strRanks = {"", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10","Jack", "Queen", "King"};
+		String[] strSuits = {"", "Diamonds", "Clubs", "Hearts", "Spades"};
+		String[] cardNames = new String[intHands.length];
+		for (intCount = 0; intCount < intHands.length; intCount++) {
+			intRank = intHands[intCount][0];
+			intSuit = intHands[intCount][1];
+			if (intRank == 0 || intSuit == 0) {
+				cardNames[intCount] = ""; // skip empty cards
+			} else {
+				cardNames[intCount] = strRanks[intRank] + " of " + strSuits[intSuit];
+			}
+		}
+		return cardNames;
+	}
 }
