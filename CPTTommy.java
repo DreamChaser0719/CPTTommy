@@ -1,4 +1,5 @@
 import arc.*;
+import java.awt.image.BufferedImage;
 
 public class CPTTommy {
 	public static void main(String[] args){
@@ -19,66 +20,70 @@ public class CPTTommy {
 		boolean blndoubledDown;
 		boolean blnskipDealerTurn;
 		boolean blnkeepPlaying;
-		boolean blnskipOutcomes;
-
-		while (true) {
-			con.println("Blackjack");
-            con.println("Play (P)");
-            con.println("Leaderboards (L)");
-            con.println("Help (H)");
-            con.println("Quit (Q)");
+		
+		BufferedImage imgHelp = con.loadImage("Help.png");
+		BufferedImage imgSecret = con.loadImage("Secret.png");
+		BufferedImage imgMainMenu = con.loadImage("MainMenu.png");
+		BufferedImage imgBG = con.loadImage("Background.png");
+		
+		while (true) { // infinite loop
+			con.clear();
+			con.drawImage(imgMainMenu, 0, 0); // draw the main menu
+			con.repaint();
 			char chrInputHome = con.getChar();
-			System.out.println("User selected menu option '" + chrInputHome + "'");
-
+			System.out.println("User selected menu option '" + chrInputHome + "'"); // debug purposes
+			
+			//depending on the input, launch different tabs
 			if (chrInputHome == 'l' || chrInputHome == 'L') {
 				System.out.println("Entering leaderboard view");
+				con.drawImage(imgBG, -300, -200); // load background image
+				intLBCount = 1;
 				TextInputFile lb = new TextInputFile("Leaderboard.txt");
-				while (!lb.eof()) {
+				
+				con.println("The top 10 players are:");
+				while (!lb.eof() && intLBCount < 11) {
 					strLBName = lb.readLine();
 					intLBMoney = lb.readInt();
-					con.println(strLBName + " - " + intLBMoney);
+					con.println(strLBName+ " - $" + intLBMoney);
+					intLBCount++;
 				}
+				intLBCount = 0; // resetting everything
 				lb.close();
+				con.getChar();
+				con.repaint();
+				con.clear();
 			} else if (chrInputHome == 'h' || chrInputHome == 'H') {
-                con.clear();
-                con.println("=== HELP MENU ===");
-                con.println("P - Play Blackjack");
-                con.println("L - View Leaderboards");
-                con.println("Q - Quit the game");
-                con.println("H - Show this help menu");
-                con.println("Try a secret option from the main menu...");
-                con.println("Press any key to return to the menu.");
+                con.drawImage(imgHelp, 0, 0); // load help image
+                con.repaint();
                 con.getChar();
                 con.clear();
             } else if (chrInputHome == 's' || chrInputHome == 'S') {
-                con.clear();
-                con.println("You found the secret menu!");
-                con.println("Why don't scientists trust atoms?");
-                con.println("Because they make up everything!");
-                con.println();
-                con.println("Press any key to go back...");
+                con.drawImage(imgSecret, 0, 0); // load secret image
+                con.repaint();
                 con.getChar();
                 con.clear();
             } else if (chrInputHome == 'q' || chrInputHome == 'Q') {
-				System.out.println("Quitting game");
-				con.closeConsole();
+				System.out.println("Quitting game"); // debug purposes
+				con.closeConsole(); // closes the console to quit
 			} else if (chrInputHome == 'p' || chrInputHome == 'P') {
+				con.clear();
+				con.drawImage(imgBG, -300, -200); // draw the bg image
 				System.out.println("User selected Play");
 				intMoney = 1000;
 				con.println("Enter your name:");
 				strName = con.readLine();
 				System.out.println("Player name is " + strName);
 
-				if (strName.equalsIgnoreCase("statitan")) {
+				if (strName.equalsIgnoreCase("statitan")) { // if the name is statitan, starts with $5000 instead
 					intMoney = 5000;
-					con.println("Cheat activated! Starting with $5000.");
+					con.println("Starting with $5000. :)");
 				} else {
 					intMoney = 1000;
 				}
 
 				blnkeepPlaying = true;
 				while (blnkeepPlaying && intMoney > 0) {
-					intBet = 0;
+					intBet = 0;// resetting ALL the variables
 					intCount = 2;
 					intHits = 1;
 					intSum = 0;
@@ -86,12 +91,11 @@ public class CPTTommy {
 					intLBCount = 0;
 					blndoubledDown = false;
 					blnskipDealerTurn = false;
-					blnskipOutcomes = false;
 
-					int intDeck [][] = MethodsFile.deck();
-					intDeck = MethodsFile.sort(intDeck);
+					int intDeck [][] = MethodsFile.deck();// creating the deck
+					intDeck = MethodsFile.sort(intDeck);// shuffling the deck
 					int intPlayers [][] = new int [5][2];
-					int intDealer [][] = new int [5][2];
+					int intDealer [][] = new int [5][2];// creating the player decks
 
 					intPlayers[0] = intDeck[0];
 					intDealer[0] = intDeck[1];
@@ -100,29 +104,30 @@ public class CPTTommy {
 					con.println("You currently have: $" + intMoney);
 					con.println("Enter your bet:");
 					intBet = con.readInt();
-					if (intBet > intMoney) {
+					if (intBet > intMoney) { // failsafe check
 						con.println("You tried to bet more than you have. Betting all in with $" + intMoney + ".");
 						intBet = intMoney;
+						con.sleep(3000);
 					}
 
 					con.clear();
 					con.println("Your cards:");
-					String[] playerCardNames = MethodsFile.getCardNames(intPlayers);
+					String[] playerCardNames = MethodsFile.getCardNames(intPlayers);// get the card names and print them
 					for (int i = 0; i < playerCardNames.length; i++) {
 						if (!playerCardNames[i].equals("")) {
 							con.println(playerCardNames[i]);
 						}
 					}
 
-					intSum = MethodsFile.CalculateTotal(intPlayers);
+					intSum = MethodsFile.CalculateTotal(intPlayers);// calculate and print the player total
 					con.println("Your total: " + intSum);
 
 					con.println("\nDealer's card:");
-					String[] dealerCardNames = MethodsFile.getCardNames(intDealer);
+					String[] dealerCardNames = MethodsFile.getCardNames(intDealer);// same applies to the dealer
 					con.println(dealerCardNames[0]);
 					intSumDealer = MethodsFile.CalculateTotal(intDealer);
 
-					// Check blackjack
+					// check for blackjack
 					if ((intPlayers[0][0] == 1 && intPlayers[1][0] >= 10) || (intPlayers[0][0] >= 10 && intPlayers[1][0] == 1)) {
 						con.println("\nBLACKJACK! You win 3x your bet!");
 						intMoney += intBet * 2;
@@ -136,21 +141,21 @@ public class CPTTommy {
 						continue;
 					}
 					
-					//Check double down
+					// check for double down
 					if (intSum == 9 || intSum == 10 || intSum == 11) {
 						con.println("Would you like to double down? (Y/N)");
 						char charDD = con.getChar();
 						if (charDD == 'y' || charDD == 'Y') {
 							if (intMoney >= 2 * intBet) {
 								blndoubledDown = true;
-								intBet *= 2;
+								intBet += intBet;
 								con.println("You doubled down! Your bet is now: $" + intBet);
 								intPlayers[2] = intDeck[3];
 								
 								intSum = MethodsFile.CalculateTotal(intPlayers);
 								playerCardNames = MethodsFile.getCardNames(intPlayers);
 								
-								con.sleep(3000);
+								con.sleep(1000);
 								con.clear();
 								con.println("Your cards:");
 								for (int i = 0; i < playerCardNames.length; i++) {
@@ -159,8 +164,9 @@ public class CPTTommy {
 									}
 								}
 								con.println("Your total is: " + intSum);
+								con.sleep(3000);
 							} else {
-								con.println("You don't have enough money, double down failed.");
+								con.println("You don't have enough money, double down failed."); // failsafe for not enough money
 								blndoubledDown = false;
 							}
 						} else {
@@ -168,13 +174,13 @@ public class CPTTommy {
 						}
 					}
 
-					// Player's Turn
+					// player's turn, only runs if double down did not happen
 					if (!blndoubledDown) {
 						while (intSum < 22 && intCount < 5) {
 							con.println("\nHit or Stand? (H/S)");
 							char charAction = con.getChar();
-							if (charAction == 'h' || charAction == 'H') {
-								intPlayers[intCount] = intDeck[intCount + 1];
+							if (charAction == 'h' || charAction == 'H') {// deals a card if the player hits
+								intPlayers[intCount] = intDeck[intCount + 1];// dealing the cards
 								intCount++;
 								con.clear();
 								con.println("Your cards:");
@@ -189,27 +195,28 @@ public class CPTTommy {
 
 								con.println("\nDealer's card:");
 								con.println(dealerCardNames[0]);
-							} else if (charAction == 's' || charAction == 'S') {
+							} else if (charAction == 's' || charAction == 'S') {// exits loop if the player decides to stand
 								break;
 							}
 						}
 					}
 					
+					// check for 5 cards for the player
 					if (intCount == 5 && intSum <= 21) {
-						con.println("\nYou got 5 cards! 3x your bet!");
+						con.println("\nYou got 5 cards! 3x your bet!"); 
 						intMoney += intBet * 2;
 						blnskipDealerTurn = true;
-						blnskipOutcomes = true;
 						con.println("Current money: $" + intMoney);
 						con.println("Play another round? (Y to continue)");
 						char chrContinue = con.getChar();
 						if (chrContinue != 'y' && chrContinue != 'Y') {
 							blnkeepPlaying = false;
 						}
-					con.clear();
+						con.clear();
+						continue;
 					}
 					
-					// Dealer's Turn
+					// dealer's turn
 					if (intSum <= 21 && intCount <= 5) {
 						con.println("\nDealer's turn...");
 						con.sleep(1000);
@@ -233,58 +240,57 @@ public class CPTTommy {
 						}
 					}
 					
-					
-					if(!blnskipOutcomes) {
-						// Final Totals
-						con.println("\n--- ROUND RESULT ---");
-						con.println("Your total: " + intSum);
-						con.println("Dealer's total: " + intSumDealer);
+					// final totals
+					con.println("\n--- ROUND RESULT ---");
+					con.println("Your total: " + intSum);
+					con.println("Dealer's total: " + intSumDealer);
 
-						// Outcomes
-						if (intHits == 5 && intSumDealer <= 21) {
-							con.println("Dealer got 5 cards! You lost your bet!");
-							intMoney -= intBet;
-						} else if (intSum > 21) {
-							con.println("You busted!");
-							intMoney -= intBet;
-						} else if (intSumDealer > 21) {
-							con.println("Dealer busted! You win!");
-							intMoney += intBet;
-						}  else if (intSum > intSumDealer) {
-							con.println("You won!");
-							intMoney += intBet;
-						} else if (intSum < intSumDealer) {
-							con.println("You lost!");
-							intMoney -= intBet;
-						} else {
-							con.println("Tie! Bet returned.");
-						}
-
-						if (intMoney <= 0) {
-							con.println("You're bankrupt! Restarting game...");
-							con.sleep(5000);
-							con.clear();
-							blnkeepPlaying = false;
-							break;
-						}
-
-						con.println("Current money: $" + intMoney);
-						con.println("Play another round? (Y to continue)");
-						char chrContinue = con.getChar();
-						if (chrContinue != 'y' && chrContinue != 'Y') {
-							blnkeepPlaying = false;
-						}
-
-						con.clear();
+					// outcomes and payout
+					if (intHits == 5 && intSumDealer <= 21) {
+						con.println("Dealer got 5 cards! You lost your bet!");
+						intMoney -= intBet;
+					} else if (intSum > 21) {
+						con.println("You busted!");
+						intMoney -= intBet;
+					} else if (intSumDealer > 21) {
+						con.println("Dealer busted! You win!");
+						intMoney += intBet;
+					}  else if (intSum > intSumDealer) {
+						con.println("You won!");
+						intMoney += intBet;
+					} else if (intSum < intSumDealer) {
+						con.println("You lost!");
+						intMoney -= intBet;
+					} else {
+						con.println("Tie! Bet returned.");
 					}
-				}
+					
+					// stops playing if the player is bankrupt
+					if (intMoney <= 0) {
+						con.println("You're bankrupt! Restarting game...");
+						con.sleep(5000);
+						con.clear();
+						blnkeepPlaying = false;
+						break;
+					}
 
+					con.println("Current money: $" + intMoney);
+					con.println("Play another round? (Y to continue)");
+					char chrContinue = con.getChar();
+					if (chrContinue != 'y' && chrContinue != 'Y') {
+						blnkeepPlaying = false;
+					}
+					con.clear();
+				}
+				
+				// storing the player name and money and closing the file
 				System.out.println("Saving leaderboard...");
 				TextOutputFile lbOutput = new TextOutputFile("Leaderboard.txt", true);
 				lbOutput.println(strName);
 				lbOutput.println(intMoney);
 				lbOutput.close();
-
+				
+				// reopens the file for input and counts to make an array of equal size
 				TextInputFile lbInput = new TextInputFile("Leaderboard.txt");
 				while (!lbInput.eof()) {
 					strLBName = lbInput.readLine();
@@ -292,7 +298,8 @@ public class CPTTommy {
 					intLBCount++;
 				}
 				lbInput.close();
-
+				
+				// reopens to store the values into a string array to sort 
 				lbInput = new TextInputFile("Leaderboard.txt");
 				strLB = new String [intLBCount][3];
 				intLBCount = 0;
@@ -306,7 +313,8 @@ public class CPTTommy {
 				}
 				strLB = MethodsFile.leaderboard(strLB, intLBCount);
 				lbInput.close();
-
+				
+				// outputs the sorted leaderboard back into the file
 				TextOutputFile lbSorted = new TextOutputFile("Leaderboard.txt");
 				for (int i = 0; i < intLBCount; i++) {
 					lbSorted.println(strLB[i][0]);
@@ -314,6 +322,7 @@ public class CPTTommy {
 				}
 				lbSorted.close();
 				System.out.println("Leaderboard saved.");
+				con.repaint();
 			}
 		}
 	}
