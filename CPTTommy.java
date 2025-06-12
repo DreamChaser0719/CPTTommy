@@ -47,6 +47,8 @@ public class CPTTommy {
 					con.println(strLBName+ " - $" + intLBMoney);
 					intLBCount++;
 				}
+				con.println();
+				con.println("Press any key to go back...");
 				intLBCount = 0; // resetting everything
 				lb.close();
 				con.getChar();
@@ -76,7 +78,7 @@ public class CPTTommy {
 
 				if (strName.equalsIgnoreCase("statitan")) { // if the name is statitan, starts with $5000 instead
 					intMoney = 5000;
-					con.println("Starting with $5000. :)");
+					con.println("Cheat activated, starting with $5000 instead :)");
 				} else {
 					intMoney = 1000;
 				}
