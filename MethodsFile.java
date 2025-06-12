@@ -1,3 +1,10 @@
+/*
+Author: Tommy Yan
+Program name: Blackjack
+Last modified: 2025/06/12
+Version number: v3.5
+*/
+
 public class MethodsFile {	
 	public static int [][] deck() {
 		// creating the array for the deck

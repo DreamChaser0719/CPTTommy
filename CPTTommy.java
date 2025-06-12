@@ -1,3 +1,10 @@
+/*
+Author: Tommy Yan
+Program name: Blackjack
+Last modified: 2025/06/12
+Version number: v3.5
+*/
+
 import arc.*;
 import java.awt.image.BufferedImage;
 
@@ -20,6 +27,7 @@ public class CPTTommy {
 		boolean blndoubledDown;
 		boolean blnskipDealerTurn;
 		boolean blnkeepPlaying;
+		boolean blnBetCheck;
 		
 		BufferedImage imgHelp = con.loadImage("Help.png");
 		BufferedImage imgSecret = con.loadImage("Secret.png");
@@ -93,6 +101,7 @@ public class CPTTommy {
 					intLBCount = 0;
 					blndoubledDown = false;
 					blnskipDealerTurn = false;
+					blnBetCheck = false;
 
 					int intDeck [][] = MethodsFile.deck();// creating the deck
 					intDeck = MethodsFile.sort(intDeck);// shuffling the deck
@@ -105,11 +114,19 @@ public class CPTTommy {
 
 					con.println("You currently have: $" + intMoney);
 					con.println("Enter your bet:");
-					intBet = con.readInt();
-					if (intBet > intMoney) { // failsafe check
-						con.println("You tried to bet more than you have. Betting all in with $" + intMoney + ".");
-						intBet = intMoney;
-						con.sleep(3000);
+					
+					while (!blnBetCheck) {
+						intBet = con.readInt();
+						if (intBet > intMoney) { // failsafe checks
+							con.println("You tried to bet more than you have. Betting all in with $" + intMoney + ".");
+							intBet = intMoney;
+							blnBetCheck = true;
+							con.sleep(3000);
+						} else if (intBet <= 0) {
+							con.println("Invalid bet, try again.");
+						} else {
+							blnBetCheck = true;
+						}
 					}
 
 					con.clear();
@@ -180,8 +197,8 @@ public class CPTTommy {
 					if (!blndoubledDown) {
 						while (intSum < 22 && intCount < 5) {
 							con.println("\nHit or Stand? (H/S)");
-							char charAction = con.getChar();
-							if (charAction == 'h' || charAction == 'H') {// deals a card if the player hits
+							char chrAction = con.getChar();
+							if (chrAction == 'h' || chrAction == 'H') {// deals a card if the player hits
 								intPlayers[intCount] = intDeck[intCount + 1];// dealing the cards
 								intCount++;
 								con.clear();
@@ -197,7 +214,7 @@ public class CPTTommy {
 
 								con.println("\nDealer's card:");
 								con.println(dealerCardNames[0]);
-							} else if (charAction == 's' || charAction == 'S') {// exits loop if the player decides to stand
+							} else if (chrAction == 's' || chrAction == 'S') {// exits loop if the player decides to stand
 								break;
 							}
 						}
